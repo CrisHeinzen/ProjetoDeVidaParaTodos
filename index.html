@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projeto de Vida para Todos</title>
+<style>
+  :root{
+    --bg:#f7f4ef; --card:#ffffff; --ink:#2b2a26; --muted:#7a766c;
+    --accent:#4a6741; --accent2:#b4552d; --line:#e6e1d6;
+    --fisico:#b4552d; --intelectual:#3b6ea5; --carater:#4a6741;
+    --afetivo:#c04a6b; --social:#c9912c; --espiritual:#6b5b95;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Georgia,'Times New Roman',serif;background:var(--bg);color:var(--ink);line-height:1.55}
+  header{padding:28px 20px 12px;text-align:center}
+  header h1{font-size:1.7rem;letter-spacing:.5px}
+  header p{color:var(--muted);font-style:italic;margin-top:4px}
+  nav{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:14px 10px;position:sticky;top:0;background:var(--bg);z-index:5;border-bottom:1px solid var(--line)}
+  nav button{font-family:inherit;font-size:.95rem;padding:8px 16px;border:1px solid var(--line);background:var(--card);border-radius:20px;cursor:pointer;color:var(--ink)}
+  nav button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  main{max-width:860px;margin:0 auto;padding:24px 16px 80px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;margin-bottom:18px}
+  .card h2{font-size:1.25rem;margin-bottom:8px}
+  .card h3{font-size:1.05rem;margin:14px 0 6px}
+  .muted{color:var(--muted)}
+  .small{font-size:.85rem}
+  textarea,input[type=text],input[type=date],select{width:100%;font-family:inherit;font-size:1rem;padding:10px;border:1px solid var(--line);border-radius:8px;background:#fdfcf9;color:var(--ink);margin-top:6px}
+  textarea{min-height:90px;resize:vertical}
+  .btn{font-family:inherit;font-size:.95rem;padding:9px 18px;border:none;border-radius:8px;background:var(--accent);color:#fff;cursor:pointer;margin-top:12px}
+  .btn.secondary{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+  .btn.small{padding:5px 10px;font-size:.82rem;margin-top:0}
+  .btn.danger{background:transparent;color:#a33;border:1px solid #c99}
+  .quote{border-left:3px solid var(--accent2);padding:8px 14px;font-style:italic;color:var(--muted);margin:10px 0}
+  .progress-dots{display:flex;gap:8px;margin:10px 0 18px}
+  .progress-dots span{width:12px;height:12px;border-radius:50%;background:var(--line)}
+  .progress-dots span.done{background:var(--accent)}
+  .progress-dots span.current{background:var(--accent2)}
+  .area-chip{display:inline-block;padding:2px 10px;border-radius:12px;color:#fff;font-size:.78rem;margin-right:6px}
+  .goal{border:1px solid var(--line);border-left-width:5px;border-radius:8px;padding:12px 14px;margin:10px 0;background:#fdfcf9}
+  .goal .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .goal.done{opacity:.55}
+  .goal.done .g-title{text-decoration:line-through}
+  .flex{display:flex;gap:10px;flex-wrap:wrap}
+  .flex>*{flex:1;min-width:160px}
+  .bars{margin:14px 0}
+  .bar-row{display:flex;align-items:center;gap:10px;margin:6px 0}
+  .bar-row .label{width:110px;font-size:.85rem;text-align:right}
+  .bar-track{flex:1;height:14px;background:var(--line);border-radius:7px;overflow:hidden}
+  .bar-fill{height:100%;border-radius:7px;transition:width .4s}
+  .timeline{position:relative;margin:18px 0;padding-left:24px;border-left:2px solid var(--accent)}
+  .tl-item{position:relative;margin-bottom:20px}
+  .tl-item::before{content:'';position:absolute;left:-31px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--accent2)}
+  .tl-year{font-weight:bold;font-size:1.05rem}
+  .banner{background:#fff8ec;border:1px solid #eadfc4;border-radius:10px;padding:12px 16px;margin-bottom:18px}
+  .hidden{display:none}
+  .center{text-align:center}
+  .rev-log{border-bottom:1px dashed var(--line);padding:10px 0}
+  footer{text-align:center;color:var(--muted);font-size:.8rem;padding:20px}
+  @media(max-width:600px){.bar-row .label{width:80px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>🛶 Projeto de Vida para Todos</h1>
+  <p>"Toma tua própria canoa e rema." — Baden-Powell</p>
+</header>
+
+<nav>
+  <button data-tab="jornada" class="active">1 · Jornada</button>
+  <button data-tab="plano">2 · Meu Plano</button>
+  <button data-tab="tempo">3 · Linha do Tempo</button>
+  <button data-tab="revisao">4 · Revisões</button>
+</nav>
+
+<main>
+
+<!-- ===================== JORNADA ===================== -->
+<section id="tab-jornada">
+  <div class="card">
+    <h2>A jornada de reflexão</h2>
+    <p class="muted">Antes do plano, vem o esboço. Responda no seu ritmo — tudo fica salvo neste dispositivo e pode ser revisto sempre. Ninguém decide por você: o papel destas perguntas é só iluminar o caminho.</p>
+    <div class="progress-dots" id="dots"></div>
+    <div id="step-box"></div>
+    <div class="flex">
+      <button class="btn secondary" id="prevStep">← Anterior</button>
+      <button class="btn" id="nextStep">Salvar e avançar →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PLANO ===================== -->
+<section id="tab-plano" class="hidden">
+  <div class="banner" id="esbocoResumo"></div>
+  <div class="card">
+    <h2>Meu Plano de Desenvolvimento Pessoal</h2>
+    <p class="muted">Um projeto de vida equilibrado cuida de seis áreas do desenvolvimento humano. Crie metas com prazo — pequenas ou grandes — e acompanhe o equilíbrio.</p>
+    <div class="bars" id="areaBars"></div>
+    <h3>Nova meta</h3>
+    <div class="flex">
+      <div><label class="small muted">Área</label><select id="gArea"></select></div>
+      <div><label class="small muted">Horizonte</label>
+        <select id="gHorizon">
+          <option value="6 meses">6 meses</option>
+          <option value="1 ano">1 ano</option>
+          <option value="2 anos">2 anos</option>
+          <option value="3 anos">3 anos</option>
+          <option value="5 anos">5 anos</option>
+        </select></div>
+    </div>
+    <label class="small muted">Meta</label>
+    <input type="text" id="gTitle" placeholder="Ex.: concluir a graduação, correr 10 km, aprender violão...">
+    <label class="small muted">Primeiro passo concreto</label>
+    <input type="text" id="gStep" placeholder="Qual é a menor ação que você pode fazer nesta semana?">
+    <button class="btn" id="addGoal">Adicionar meta</button>
+  </div>
+  <div class="card"><h2>Minhas metas</h2><div id="goalList"></div></div>
+</section>
+
+<!-- ===================== LINHA DO TEMPO ===================== -->
+<section id="tab-tempo" class="hidden">
+  <div class="card">
+    <h2>Linha do tempo — próximos 5 anos</h2>
+    <p class="muted">Suas metas organizadas no tempo. O futuro desejado, passo a passo.</p>
+    <div class="timeline" id="timeline"></div>
+  </div>
+</section>
+
+<!-- ===================== REVISÕES ===================== -->
+<section id="tab-revisao" class="hidden">
+  <div class="card">
+    <h2>Ciclo de revisões</h2>
+    <p class="muted">Um projeto de vida não é um documento — é um hábito. Revisite-o periodicamente: celebre o que avançou, ajuste o rumo, reformule sem culpa.</p>
+    <div id="nextRevBox"></div>
+    <label class="small muted">Agendar próxima revisão</label>
+    <input type="date" id="revDate">
+    <button class="btn" id="saveRevDate">Agendar</button>
+  </div>
+  <div class="card">
+    <h2>Fazer uma revisão agora</h2>
+    <p class="quote">"Promover a revisão de seu Projeto de Vida, projetando o caminho que pretende seguir para atingir aquilo que se propôs."</p>
+    <label class="small muted">O que avançou desde a última revisão?</label>
+    <textarea id="revWins"></textarea>
+    <label class="small muted">O que mudou em mim ou ao meu redor? O que precisa ser ajustado?</label>
+    <textarea id="revChanges"></textarea>
+    <label class="small muted">Qual é o rumo para o próximo período?</label>
+    <textarea id="revNext"></textarea>
+    <button class="btn" id="saveReview">Registrar revisão</button>
+  </div>
+  <div class="card">
+    <h2>Histórico de revisões</h2>
+    <div id="revLog"></div>
+  </div>
+  <div class="card">
+    <h2>Seus dados</h2>
+    <p class="muted small">Tudo é salvo apenas neste navegador. Exporte um backup quando quiser.</p>
+    <div class="flex">
+      <button class="btn secondary" id="exportBtn">Exportar (JSON)</button>
+      <button class="btn secondary" id="importBtn">Importar</button>
+      <button class="btn danger" id="resetBtn">Apagar tudo</button>
+    </div>
+    <input type="file" id="importFile" accept=".json" class="hidden">
+  </div>
+</section>
+
+</main>
+<footer>Inspirado no Plano de Desenvolvimento Pessoal (Projeto de Vida) do Ramo Pioneiro — Escoteiros do Brasil.</footer>
+
+<script>
+const AREAS=[
+ {id:'fisico',n:'Físico',c:'var(--fisico)'},
+ {id:'intelectual',n:'Intelectual',c:'var(--intelectual)'},
+ {id:'carater',n:'Caráter',c:'var(--carater)'},
+ {id:'afetivo',n:'Afetivo',c:'var(--afetivo)'},
+ {id:'social',n:'Social',c:'var(--social)'},
+ {id:'espiritual',n:'Espiritual',c:'var(--espiritual)'}
+];
+const STEPS=[
+ {k:'quemSou',t:'Quem sou eu?',q:'Escreva livremente sobre você: sua história até aqui, suas forças, suas limitações. O que as pessoas que te conhecem bem diriam de você?',ph:'Minha história, minhas forças, minhas limitações...'},
+ {k:'valores',t:'Meus valores',q:'Quais valores você escolhe como bússola da sua vida? Pense em 3 a 5 princípios dos quais você não abre mão — e por quê.',ph:'Ex.: honestidade, serviço ao próximo, família, liberdade...'},
+ {k:'mundo',t:'Meu mundo ao redor',q:'Faça uma análise prática do seu cenário: onde você vive, com quem conta, quais oportunidades e obstáculos existem ao seu redor hoje?',ph:'Contexto, pessoas, oportunidades, obstáculos...'},
+ {k:'futuro',t:'O futuro desejado',q:'Daqui a 5 anos, se tudo caminhar bem: onde você está? O que faz? Com quem? Como se sente? Descreva esse futuro como se já estivesse vivendo nele.',ph:'Daqui a 5 anos eu...'},
+ {k:'escolhas',t:'As escolhas',q:'Todas as possibilidades estão abertas, mas não dá para atingir todas — é preciso escolher. Do futuro que você descreveu, o que é essencial? O que você aceita deixar de lado por ora?',ph:'O essencial para mim é... Abro mão, por enquanto, de...'},
+ {k:'apoio',t:'Minha rede de apoio',q:'Quem pode ser seu "padrinho/madrinha" nessa caminhada — alguém maduro que faça boas perguntas sem decidir por você? E quais amigos ajudarão a manter o rumo?',ph:'Pessoas com quem vou compartilhar este projeto...'}
+];
+let db=load();
+function load(){try{return JSON.parse(localStorage.getItem('pvpt'))||{}}catch(e){return{}}}
+function save(){localStorage.setItem('pvpt',JSON.stringify(db))}
+db.journey=db.journey||{};db.goals=db.goals||[];db.reviews=db.reviews||[];db.step=db.step||0;
+
+/* ---------- navegação ---------- */
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  ['jornada','plano','tempo','revisao'].forEach(t=>document.getElementById('tab-'+t).classList.toggle('hidden',t!==b.dataset.tab));
+  render();
+});
+
+/* ---------- jornada ---------- */
+function renderJourney(){
+  const i=db.step, s=STEPS[Math.min(i,STEPS.length-1)];
+  document.getElementById('dots').innerHTML=STEPS.map((_,j)=>`<span class="${j<i?'done':j===i?'current':''}"></span>`).join('');
+  const box=document.getElementById('step-box');
+  if(i>=STEPS.length){
+    box.innerHTML=`<h3>✅ Esboço concluído!</h3><p class="muted">Você completou a jornada de reflexão. Agora transforme o esboço em plano: vá para <b>Meu Plano</b> e crie metas nas seis áreas. Você pode voltar e revisar qualquer resposta quando quiser.</p>`;
+    document.getElementById('nextStep').classList.add('hidden');
+  }else{
+    document.getElementById('nextStep').classList.remove('hidden');
+    box.innerHTML=`<h3>${i+1}. ${s.t}</h3><p class="muted">${s.q}</p><textarea id="stepText" placeholder="${s.ph}">${db.journey[s.k]||''}</textarea>`;
+  }
+  document.getElementById('prevStep').style.visibility=i===0?'hidden':'visible';
+}
+document.getElementById('nextStep').onclick=()=>{
+  const s=STEPS[db.step]; if(s){db.journey[s.k]=document.getElementById('stepText').value}
+  db.step=Math.min(db.step+1,STEPS.length); save(); renderJourney();
+};
+document.getElementById('prevStep').onclick=()=>{
+  const s=STEPS[db.step]; if(s&&document.getElementById('stepText'))db.journey[s.k]=document.getElementById('stepText').value;
+  db.step=Math.max(db.step-1,0); save(); renderJourney();
+};
+
+/* ---------- plano ---------- */
+document.getElementById('gArea').innerHTML=AREAS.map(a=>`<option value="${a.id}">${a.n}</option>`).join('');
+document.getElementById('addGoal').onclick=()=>{
+  const t=document.getElementById('gTitle').value.trim(); if(!t)return alert('Escreva a meta.');
+  db.goals.push({id:Date.now(),area:document.getElementById('gArea').value,horizon:document.getElementById('gHorizon').value,title:t,step:document.getElementById('gStep').value.trim(),done:false});
+  document.getElementById('gTitle').value='';document.getElementById('gStep').value='';
+  save(); render();
+};
+function area(id){return AREAS.find(a=>a.id===id)}
+function renderPlan(){
+  const vals=db.journey.valores?`<b>Bússola de valores:</b> ${esc(db.journey.valores).slice(0,220)}`:'Complete a <b>Jornada</b> para trazer seus valores e seu futuro desejado para cá.';
+  document.getElementById('esbocoResumo').innerHTML='🧭 '+vals;
+  document.getElementById('areaBars').innerHTML=AREAS.map(a=>{
+    const n=db.goals.filter(g=>g.area===a.id).length;
+    const max=Math.max(1,...AREAS.map(x=>db.goals.filter(g=>g.area===x.id).length));
+    return `<div class="bar-row"><div class="label">${a.n}</div><div class="bar-track"><div class="bar-fill" style="width:${n/max*100}%;background:${a.c}"></div></div><div class="small muted">${n}</div></div>`;
+  }).join('');
+  const list=document.getElementById('goalList');
+  list.innerHTML=db.goals.length?db.goals.map(g=>`
+    <div class="goal ${g.done?'done':''}" style="border-left-color:${area(g.area).c}">
+      <div class="top"><div><span class="area-chip" style="background:${area(g.area).c}">${area(g.area).n}</span><b class="g-title">${esc(g.title)}</b></div><span class="small muted">${g.horizon}</span></div>
+      ${g.step?`<div class="small muted">Primeiro passo: ${esc(g.step)}</div>`:''}
+      <div style="margin-top:8px">
+        <button class="btn small secondary" onclick="toggleGoal(${g.id})">${g.done?'Reabrir':'Concluída ✓'}</button>
+        <button class="btn small danger" onclick="delGoal(${g.id})">Excluir</button>
+      </div>
+    </div>`).join(''):'<p class="muted">Nenhuma meta ainda. Comece pequeno — uma meta em uma área já é um começo.</p>';
+}
+window.toggleGoal=id=>{const g=db.goals.find(x=>x.id===id);g.done=!g.done;save();render()};
+window.delGoal=id=>{if(confirm('Excluir esta meta?')){db.goals=db.goals.filter(x=>x.id!==id);save();render()}};
+
+/* ---------- linha do tempo ---------- */
+function renderTimeline(){
+  const order=['6 meses','1 ano','2 anos','3 anos','5 anos'];
+  const y=new Date().getFullYear();
+  const lbl={'6 meses':`${y} · em 6 meses`,'1 ano':`${y+1}`,'2 anos':`${y+2}`,'3 anos':`${y+3}`,'5 anos':`${y+5}`};
+  document.getElementById('timeline').innerHTML=order.map(h=>{
+    const gs=db.goals.filter(g=>g.horizon===h);
+    if(!gs.length)return '';
+    return `<div class="tl-item"><div class="tl-year">${lbl[h]}</div>${gs.map(g=>`<div><span class="area-chip" style="background:${area(g.area).c}">${area(g.area).n}</span>${g.done?'✅ ':''}${esc(g.title)}</div>`).join('')}</div>`;
+  }).join('')||'<p class="muted">Crie metas em <b>Meu Plano</b> para vê-las aqui.</p>';
+}
+
+/* ---------- revisões ---------- */
+function renderReviews(){
+  const box=document.getElementById('nextRevBox');
+  if(db.nextReview){
+    const d=new Date(db.nextReview+'T00:00'),today=new Date();today.setHours(0,0,0,0);
+    const diff=Math.round((d-today)/864e5);
+    box.innerHTML=diff<0?`<div class="banner">⏰ <b>Sua revisão está atrasada ${-diff} dia(s).</b> Que tal fazê-la agora, logo abaixo?</div>`
+      :diff===0?`<div class="banner">🌟 <b>Hoje é dia de revisão do seu projeto de vida!</b></div>`
+      :`<div class="banner">📅 Próxima revisão em <b>${diff} dia(s)</b> (${d.toLocaleDateString('pt-BR')}).</div>`;
+  }else box.innerHTML='<div class="banner">Nenhuma revisão agendada. Sugestão: a cada 3 meses.</div>';
+  document.getElementById('revLog').innerHTML=db.reviews.length?[...db.reviews].reverse().map(r=>`
+    <div class="rev-log"><b>${new Date(r.date).toLocaleDateString('pt-BR')}</b>
+    ${r.wins?`<div class="small"><b>Avanços:</b> ${esc(r.wins)}</div>`:''}
+    ${r.changes?`<div class="small"><b>Ajustes:</b> ${esc(r.changes)}</div>`:''}
+    ${r.next?`<div class="small"><b>Rumo:</b> ${esc(r.next)}</div>`:''}</div>`).join('')
+    :'<p class="muted">Nenhuma revisão registrada ainda.</p>';
+}
+document.getElementById('saveRevDate').onclick=()=>{
+  const v=document.getElementById('revDate').value; if(!v)return alert('Escolha uma data.');
+  db.nextReview=v;save();render();
+};
+document.getElementById('saveReview').onclick=()=>{
+  const wins=document.getElementById('revWins').value.trim(),changes=document.getElementById('revChanges').value.trim(),next=document.getElementById('revNext').value.trim();
+  if(!wins&&!changes&&!next)return alert('Escreva pelo menos um campo.');
+  db.reviews.push({date:new Date().toISOString(),wins,changes,next});
+  const d=new Date();d.setMonth(d.getMonth()+3);db.nextReview=d.toISOString().slice(0,10);
+  ['revWins','revChanges','revNext'].forEach(i=>document.getElementById(i).value='');
+  save();render();alert('Revisão registrada! Próxima sugerida daqui a 3 meses — ajuste a data se quiser.');
+};
+
+/* ---------- dados ---------- */
+document.getElementById('exportBtn').onclick=()=>{
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([JSON.stringify(db,null,2)],{type:'application/json'}));
+  a.download='projeto-de-vida-backup.json';a.click();
+};
+document.getElementById('importBtn').onclick=()=>document.getElementById('importFile').click();
+document.getElementById('importFile').onchange=e=>{
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();r.onload=()=>{try{db=JSON.parse(r.result);db.journey=db.journey||{};db.goals=db.goals||[];db.reviews=db.reviews||[];db.step=db.step||0;save();render();alert('Dados importados!')}catch(err){alert('Arquivo inválido.')}};r.readAsText(f);
+};
+document.getElementById('resetBtn').onclick=()=>{if(confirm('Apagar TODOS os dados deste dispositivo?')){localStorage.removeItem('pvpt');db={journey:{},goals:[],reviews:[],step:0};render()}};
+
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function render(){renderJourney();renderPlan();renderTimeline();renderReviews()}
+render();
+</script>
+</body>
+</html>
