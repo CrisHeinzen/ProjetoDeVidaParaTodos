@@ -7,57 +7,77 @@
 <style>
   :root{
     --bg:#f7f4ef; --card:#ffffff; --ink:#2b2a26; --muted:#7a766c;
-    --accent:#4a6741; --accent2:#b4552d; --line:#e6e1d6;
+    --accent:#4a6741; --accent2:#b4552d; --line:#e6e1d6; --soft:#fdfcf9;
     --fisico:#b4552d; --intelectual:#3b6ea5; --carater:#4a6741;
     --afetivo:#c04a6b; --social:#c9912c; --espiritual:#6b5b95;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:Georgia,'Times New Roman',serif;background:var(--bg);color:var(--ink);line-height:1.55}
-  header{padding:28px 20px 12px;text-align:center}
-  header h1{font-size:1.7rem;letter-spacing:.5px}
-  header p{color:var(--muted);font-style:italic;margin-top:4px}
-  nav{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:14px 10px;position:sticky;top:0;background:var(--bg);z-index:5;border-bottom:1px solid var(--line)}
-  nav button{font-family:inherit;font-size:.95rem;padding:8px 16px;border:1px solid var(--line);background:var(--card);border-radius:20px;cursor:pointer;color:var(--ink)}
+  header{padding:26px 20px 10px;text-align:center}
+  header h1{font-size:1.65rem;letter-spacing:.5px}
+  header p{color:var(--muted);font-style:italic;margin-top:4px;font-size:.95rem}
+  nav{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:12px 10px;position:sticky;top:0;background:var(--bg);z-index:5;border-bottom:1px solid var(--line)}
+  nav button{font-family:inherit;font-size:.92rem;padding:8px 15px;border:1px solid var(--line);background:var(--card);border-radius:20px;cursor:pointer;color:var(--ink)}
   nav button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-  main{max-width:860px;margin:0 auto;padding:24px 16px 80px}
+  main{max-width:880px;margin:0 auto;padding:22px 16px 80px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;margin-bottom:18px}
-  .card h2{font-size:1.25rem;margin-bottom:8px}
-  .card h3{font-size:1.05rem;margin:14px 0 6px}
-  .muted{color:var(--muted)}
-  .small{font-size:.85rem}
-  textarea,input[type=text],input[type=date],select{width:100%;font-family:inherit;font-size:1rem;padding:10px;border:1px solid var(--line);border-radius:8px;background:#fdfcf9;color:var(--ink);margin-top:6px}
-  textarea{min-height:90px;resize:vertical}
+  .card h2{font-size:1.22rem;margin-bottom:8px}
+  .card h3{font-size:1.02rem;margin:14px 0 6px}
+  .muted{color:var(--muted)} .small{font-size:.85rem} .center{text-align:center}
+  textarea,input[type=text],input[type=date],input[type=number],select{width:100%;font-family:inherit;font-size:1rem;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink);margin-top:6px}
+  textarea{min-height:88px;resize:vertical}
   .btn{font-family:inherit;font-size:.95rem;padding:9px 18px;border:none;border-radius:8px;background:var(--accent);color:#fff;cursor:pointer;margin-top:12px}
   .btn.secondary{background:transparent;color:var(--accent);border:1px solid var(--accent)}
   .btn.small{padding:5px 10px;font-size:.82rem;margin-top:0}
   .btn.danger{background:transparent;color:#a33;border:1px solid #c99}
   .quote{border-left:3px solid var(--accent2);padding:8px 14px;font-style:italic;color:var(--muted);margin:10px 0}
-  .progress-dots{display:flex;gap:8px;margin:10px 0 18px}
-  .progress-dots span{width:12px;height:12px;border-radius:50%;background:var(--line)}
+  .progress-dots{display:flex;gap:7px;margin:10px 0 16px;flex-wrap:wrap}
+  .progress-dots span{width:11px;height:11px;border-radius:50%;background:var(--line);cursor:pointer}
   .progress-dots span.done{background:var(--accent)}
   .progress-dots span.current{background:var(--accent2)}
-  .area-chip{display:inline-block;padding:2px 10px;border-radius:12px;color:#fff;font-size:.78rem;margin-right:6px}
-  .goal{border:1px solid var(--line);border-left-width:5px;border-radius:8px;padding:12px 14px;margin:10px 0;background:#fdfcf9}
+  .area-chip{display:inline-block;padding:2px 10px;border-radius:12px;color:#fff;font-size:.76rem;margin-right:6px}
+  .goal{border:1px solid var(--line);border-left-width:5px;border-radius:8px;padding:12px 14px;margin:10px 0;background:var(--soft)}
   .goal .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
-  .goal.done{opacity:.55}
-  .goal.done .g-title{text-decoration:line-through}
-  .flex{display:flex;gap:10px;flex-wrap:wrap}
-  .flex>*{flex:1;min-width:160px}
+  .goal.done{opacity:.55} .goal.done .g-title{text-decoration:line-through}
+  .flex{display:flex;gap:10px;flex-wrap:wrap} .flex>*{flex:1;min-width:150px}
   .bars{margin:14px 0}
   .bar-row{display:flex;align-items:center;gap:10px;margin:6px 0}
-  .bar-row .label{width:110px;font-size:.85rem;text-align:right}
-  .bar-track{flex:1;height:14px;background:var(--line);border-radius:7px;overflow:hidden}
+  .bar-row .label{width:105px;font-size:.84rem;text-align:right}
+  .bar-track{flex:1;height:13px;background:var(--line);border-radius:7px;overflow:hidden}
   .bar-fill{height:100%;border-radius:7px;transition:width .4s}
   .timeline{position:relative;margin:18px 0;padding-left:24px;border-left:2px solid var(--accent)}
   .tl-item{position:relative;margin-bottom:20px}
   .tl-item::before{content:'';position:absolute;left:-31px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--accent2)}
-  .tl-year{font-weight:bold;font-size:1.05rem}
-  .banner{background:#fff8ec;border:1px solid #eadfc4;border-radius:10px;padding:12px 16px;margin-bottom:18px}
+  .tl-year{font-weight:bold;font-size:1.02rem}
+  .banner{background:#fff8ec;border:1px solid #eadfc4;border-radius:10px;padding:12px 16px;margin-bottom:16px}
   .hidden{display:none}
-  .center{text-align:center}
   .rev-log{border-bottom:1px dashed var(--line);padding:10px 0}
-  footer{text-align:center;color:var(--muted);font-size:.8rem;padding:20px}
-  @media(max-width:600px){.bar-row .label{width:80px}}
+  .wheel-wrap{display:flex;gap:18px;flex-wrap:wrap;align-items:center;justify-content:center}
+  .wheel-sliders{flex:1;min-width:240px}
+  .slider-row{display:flex;align-items:center;gap:8px;margin:7px 0}
+  .slider-row .label{width:95px;font-size:.85rem;text-align:right}
+  .slider-row input[type=range]{flex:1;accent-color:var(--accent)}
+  .slider-row .val{width:22px;text-align:center;font-size:.9rem}
+  .habit{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin:7px 0;background:var(--soft)}
+  .habit .name{flex:1}
+  .habit .streak{font-size:.8rem;color:var(--accent2)}
+  .habit input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent)}
+  .top3-item{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-left:5px solid var(--accent2);border-radius:8px;padding:10px 12px;margin:8px 0;background:var(--soft)}
+  .top3-item input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent)}
+  .top3-item.done .t{text-decoration:line-through;opacity:.6}
+  .space-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:10px}
+  .space-col{border:1px solid var(--line);border-radius:8px;padding:10px;background:var(--soft)}
+  .space-col h4{font-size:.9rem;margin-bottom:6px}
+  .space-col ul{list-style:none}
+  .space-col li{font-size:.86rem;padding:3px 0;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;gap:6px}
+  .space-col li button{border:none;background:none;color:#a33;cursor:pointer}
+  .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:12px 0}
+  .kpi{border:1px solid var(--line);border-radius:10px;padding:14px 10px;text-align:center;background:var(--soft)}
+  .kpi .num{font-size:1.7rem;font-weight:bold;color:var(--accent)}
+  .kpi .lbl{font-size:.78rem;color:var(--muted)}
+  .support-person{display:flex;justify-content:space-between;align-items:center;border-bottom:1px dashed var(--line);padding:7px 0}
+  footer{text-align:center;color:var(--muted);font-size:.78rem;padding:20px;line-height:1.7}
+  @media(max-width:600px){.bar-row .label{width:78px}.slider-row .label{width:78px}}
 </style>
 </head>
 <body>
@@ -67,19 +87,20 @@
 </header>
 
 <nav>
-  <button data-tab="jornada" class="active">1 · Jornada</button>
-  <button data-tab="plano">2 · Meu Plano</button>
-  <button data-tab="tempo">3 · Linha do Tempo</button>
-  <button data-tab="revisao">4 · Revisões</button>
+  <button data-tab="descobrir" class="active">1 · Descobrir</button>
+  <button data-tab="planejar">2 · Planejar</button>
+  <button data-tab="semana">3 · Semana</button>
+  <button data-tab="constancia">4 · Constância</button>
+  <button data-tab="revisar">5 · Revisar</button>
 </nav>
 
 <main>
 
-<!-- ===================== JORNADA ===================== -->
-<section id="tab-jornada">
+<!-- ============ DESCOBRIR ============ -->
+<section id="tab-descobrir">
   <div class="card">
     <h2>A jornada de reflexão</h2>
-    <p class="muted">Antes do plano, vem o esboço. Responda no seu ritmo — tudo fica salvo neste dispositivo e pode ser revisto sempre. Ninguém decide por você: o papel destas perguntas é só iluminar o caminho.</p>
+    <p class="muted">Antes do plano, vem o esboço. Ninguém decide por você — estas perguntas só iluminam o caminho. Tudo fica salvo neste dispositivo.</p>
     <div class="progress-dots" id="dots"></div>
     <div id="step-box"></div>
     <div class="flex">
@@ -87,70 +108,140 @@
       <button class="btn" id="nextStep">Salvar e avançar →</button>
     </div>
   </div>
+  <div class="card" id="wheelCard">
+    <h2>Roda da Vida — seu diagnóstico</h2>
+    <p class="muted small">De 0 a 10, como está cada área da sua vida hoje? Este é o retrato do ponto de partida (ponto A). O plano constrói a ponte até o ponto B.</p>
+    <div class="wheel-wrap">
+      <svg id="wheelSvg" width="230" height="230" viewBox="0 0 230 230"></svg>
+      <div class="wheel-sliders" id="wheelSliders"></div>
+    </div>
+  </div>
 </section>
 
-<!-- ===================== PLANO ===================== -->
-<section id="tab-plano" class="hidden">
+<!-- ============ PLANEJAR ============ -->
+<section id="tab-planejar" class="hidden">
   <div class="banner" id="esbocoResumo"></div>
   <div class="card">
-    <h2>Meu Plano de Desenvolvimento Pessoal</h2>
-    <p class="muted">Um projeto de vida equilibrado cuida de seis áreas do desenvolvimento humano. Crie metas com prazo — pequenas ou grandes — e acompanhe o equilíbrio.</p>
+    <h2>Metas nas 6 áreas</h2>
+    <p class="muted">Um projeto equilibrado cuida das seis áreas do desenvolvimento humano. Metas claras, com prazo, um porquê e um primeiro passo.</p>
     <div class="bars" id="areaBars"></div>
     <h3>Nova meta</h3>
     <div class="flex">
       <div><label class="small muted">Área</label><select id="gArea"></select></div>
       <div><label class="small muted">Horizonte</label>
         <select id="gHorizon">
-          <option value="6 meses">6 meses</option>
-          <option value="1 ano">1 ano</option>
-          <option value="2 anos">2 anos</option>
-          <option value="3 anos">3 anos</option>
+          <option value="6 meses">6 meses</option><option value="1 ano">1 ano</option>
+          <option value="2 anos">2 anos</option><option value="3 anos">3 anos</option>
           <option value="5 anos">5 anos</option>
         </select></div>
     </div>
-    <label class="small muted">Meta</label>
-    <input type="text" id="gTitle" placeholder="Ex.: concluir a graduação, correr 10 km, aprender violão...">
-    <label class="small muted">Primeiro passo concreto</label>
-    <input type="text" id="gStep" placeholder="Qual é a menor ação que você pode fazer nesta semana?">
+    <label class="small muted">Meta (específica e mensurável)</label>
+    <input type="text" id="gTitle" placeholder="Ex.: correr 10 km, concluir a graduação, ler 12 livros...">
+    <label class="small muted">Por que ela importa? (ligue a um valor seu ou à sua visão)</label>
+    <input type="text" id="gWhy" placeholder="Ex.: saúde para acompanhar meus filhos crescendo">
+    <label class="small muted">Primeiro passo concreto (esta semana)</label>
+    <input type="text" id="gStep" placeholder="Qual é a menor ação possível?">
+    <label class="small muted">O que preciso desenvolver? (conhecimento · habilidade · atitude — opcional)</label>
+    <input type="text" id="gCha" placeholder="Ex.: aprender inglês (C), treinar oratória (H), pedir ajuda (A)">
     <button class="btn" id="addGoal">Adicionar meta</button>
   </div>
   <div class="card"><h2>Minhas metas</h2><div id="goalList"></div></div>
-</section>
-
-<!-- ===================== LINHA DO TEMPO ===================== -->
-<section id="tab-tempo" class="hidden">
   <div class="card">
     <h2>Linha do tempo — próximos 5 anos</h2>
-    <p class="muted">Suas metas organizadas no tempo. O futuro desejado, passo a passo.</p>
     <div class="timeline" id="timeline"></div>
+  </div>
+  <div class="card">
+    <h2>Minha rede de apoio</h2>
+    <p class="muted small">Um projeto compartilhado é mais forte. Quem conhece o seu? Um padrinho/madrinha que faz boas perguntas, amigos que ajudam a manter o rumo.</p>
+    <div id="supportList"></div>
+    <div class="flex">
+      <input type="text" id="supName" placeholder="Nome">
+      <select id="supRole"><option>Padrinho/Madrinha</option><option>Par (amigo/colega)</option><option>Mentor profissional</option><option>Família</option></select>
+    </div>
+    <button class="btn secondary" id="addSup">Adicionar pessoa</button>
   </div>
 </section>
 
-<!-- ===================== REVISÕES ===================== -->
-<section id="tab-revisao" class="hidden">
+<!-- ============ SEMANA ============ -->
+<section id="tab-semana" class="hidden">
   <div class="card">
-    <h2>Ciclo de revisões</h2>
-    <p class="muted">Um projeto de vida não é um documento — é um hábito. Revisite-o periodicamente: celebre o que avançou, ajuste o rumo, reformule sem culpa.</p>
+    <h2>Top 3 da semana <span class="small muted" id="weekLabel"></span></h2>
+    <p class="muted small">Foco é força: escolha até 3 ações que fazem suas metas avançarem nesta semana. Menos é mais.</p>
+    <div id="top3List"></div>
+    <div class="flex">
+      <input type="text" id="t3Text" placeholder="Ação da semana (ligada a uma meta, se possível)">
+      <select id="t3Goal"></select>
+    </div>
+    <button class="btn" id="addTop3">Adicionar ao top 3</button>
+  </div>
+  <div class="card">
+    <h2>Hábitos de hoje <span class="small muted" id="todayLabel"></span></h2>
+    <p class="muted small">Disciplina é um músculo: treina-se com repetições pequenas e diárias.</p>
+    <div id="habitList"></div>
+    <div class="flex"><input type="text" id="habName" placeholder="Novo hábito diário (ex.: caminhar 20 min, ler 10 páginas)"></div>
+    <button class="btn secondary" id="addHabit">Adicionar hábito</button>
+  </div>
+  <div class="card">
+    <h2>Abrir espaço livre</h2>
+    <p class="muted small">Antes de acrescentar, remova. O que você precisa <b>parar</b>, <b>delegar</b> ou <b>começar</b>?</p>
+    <div class="flex">
+      <input type="text" id="spText" placeholder="Ex.: rolagem infinita à noite">
+      <select id="spType"><option value="parar">Parar</option><option value="delegar">Delegar</option><option value="comecar">Começar</option></select>
+    </div>
+    <button class="btn secondary" id="addSpace">Registrar</button>
+    <div class="space-cols">
+      <div class="space-col"><h4>⛔ Parar</h4><ul id="sp-parar"></ul></div>
+      <div class="space-col"><h4>🤝 Delegar</h4><ul id="sp-delegar"></ul></div>
+      <div class="space-col"><h4>🌱 Começar</h4><ul id="sp-comecar"></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONSTÂNCIA ============ -->
+<section id="tab-constancia" class="hidden">
+  <div class="card">
+    <h2>Placar da constância</h2>
+    <p class="quote">A maestria mora no platô: os dias comuns, repetidos com carinho, são o próprio caminho.</p>
+    <div class="kpi-grid" id="kpiGrid"></div>
+    <div id="plateauMsg" class="banner"></div>
+  </div>
+  <div class="card">
+    <h2>Indicadores do mês</h2>
+    <div class="bars" id="monthBars"></div>
+    <p class="muted small">Indicadores são feedback, não julgamento. Eles mostram onde ajustar o rumo.</p>
+  </div>
+</section>
+
+<!-- ============ REVISAR ============ -->
+<section id="tab-revisar" class="hidden">
+  <div class="card">
+    <h2>O ciclo que nunca termina</h2>
+    <p class="muted">Um projeto de vida não é um documento — é um hábito. Feche a semana com uma revisão leve; a cada 3 meses, faça uma vigília profunda.</p>
     <div id="nextRevBox"></div>
-    <label class="small muted">Agendar próxima revisão</label>
+    <label class="small muted">Agendar próxima vigília (revisão profunda)</label>
     <input type="date" id="revDate">
     <button class="btn" id="saveRevDate">Agendar</button>
   </div>
   <div class="card">
-    <h2>Fazer uma revisão agora</h2>
-    <p class="quote">"Promover a revisão de seu Projeto de Vida, projetando o caminho que pretende seguir para atingir aquilo que se propôs."</p>
-    <label class="small muted">O que avançou desde a última revisão?</label>
+    <h2>Revisão da semana (leve)</h2>
+    <label class="small muted">O que avançou nesta semana?</label>
     <textarea id="revWins"></textarea>
-    <label class="small muted">O que mudou em mim ou ao meu redor? O que precisa ser ajustado?</label>
+    <label class="small muted">O que travou? O que ajustar?</label>
     <textarea id="revChanges"></textarea>
-    <label class="small muted">Qual é o rumo para o próximo período?</label>
-    <textarea id="revNext"></textarea>
-    <button class="btn" id="saveReview">Registrar revisão</button>
+    <button class="btn" id="saveWeekReview">Fechar a semana</button>
   </div>
   <div class="card">
-    <h2>Histórico de revisões</h2>
-    <div id="revLog"></div>
+    <h2>Vigília (revisão profunda)</h2>
+    <p class="quote">"Promover a revisão de seu Projeto de Vida, projetando o caminho que pretende seguir para atingir aquilo que se propôs."</p>
+    <label class="small muted">Relendo minha jornada e minha visão: o que mudou em mim ou ao meu redor?</label>
+    <textarea id="vigChanges"></textarea>
+    <label class="small muted">Minhas metas ainda apontam para o futuro que eu quero? O que reformular?</label>
+    <textarea id="vigGoals"></textarea>
+    <label class="small muted">Qual é o rumo para o próximo trimestre?</label>
+    <textarea id="vigNext"></textarea>
+    <button class="btn" id="saveVigil">Registrar vigília</button>
   </div>
+  <div class="card"><h2>Histórico</h2><div id="revLog"></div></div>
   <div class="card">
     <h2>Seus dados</h2>
     <p class="muted small">Tudo é salvo apenas neste navegador. Exporte um backup quando quiser.</p>
@@ -164,135 +255,262 @@
 </section>
 
 </main>
-<footer>Inspirado no Plano de Desenvolvimento Pessoal (Projeto de Vida) do Ramo Pioneiro — Escoteiros do Brasil.</footer>
+<footer>
+  Inspirado no Plano de Desenvolvimento Pessoal do Ramo Pioneiro (Escoteiros do Brasil),<br>
+  com práticas de execução e constância de métodos de produtividade e desenvolvimento pessoal.
+</footer>
 
 <script>
+/* ================= dados ================= */
 const AREAS=[
- {id:'fisico',n:'Físico',c:'var(--fisico)'},
- {id:'intelectual',n:'Intelectual',c:'var(--intelectual)'},
- {id:'carater',n:'Caráter',c:'var(--carater)'},
- {id:'afetivo',n:'Afetivo',c:'var(--afetivo)'},
- {id:'social',n:'Social',c:'var(--social)'},
- {id:'espiritual',n:'Espiritual',c:'var(--espiritual)'}
+ {id:'fisico',n:'Físico',c:'var(--fisico)',hex:'#b4552d'},
+ {id:'intelectual',n:'Intelectual',c:'var(--intelectual)',hex:'#3b6ea5'},
+ {id:'carater',n:'Caráter',c:'var(--carater)',hex:'#4a6741'},
+ {id:'afetivo',n:'Afetivo',c:'var(--afetivo)',hex:'#c04a6b'},
+ {id:'social',n:'Social',c:'var(--social)',hex:'#c9912c'},
+ {id:'espiritual',n:'Espiritual',c:'var(--espiritual)',hex:'#6b5b95'}
 ];
 const STEPS=[
- {k:'quemSou',t:'Quem sou eu?',q:'Escreva livremente sobre você: sua história até aqui, suas forças, suas limitações. O que as pessoas que te conhecem bem diriam de você?',ph:'Minha história, minhas forças, minhas limitações...'},
- {k:'valores',t:'Meus valores',q:'Quais valores você escolhe como bússola da sua vida? Pense em 3 a 5 princípios dos quais você não abre mão — e por quê.',ph:'Ex.: honestidade, serviço ao próximo, família, liberdade...'},
- {k:'mundo',t:'Meu mundo ao redor',q:'Faça uma análise prática do seu cenário: onde você vive, com quem conta, quais oportunidades e obstáculos existem ao seu redor hoje?',ph:'Contexto, pessoas, oportunidades, obstáculos...'},
- {k:'futuro',t:'O futuro desejado',q:'Daqui a 5 anos, se tudo caminhar bem: onde você está? O que faz? Com quem? Como se sente? Descreva esse futuro como se já estivesse vivendo nele.',ph:'Daqui a 5 anos eu...'},
- {k:'escolhas',t:'As escolhas',q:'Todas as possibilidades estão abertas, mas não dá para atingir todas — é preciso escolher. Do futuro que você descreveu, o que é essencial? O que você aceita deixar de lado por ora?',ph:'O essencial para mim é... Abro mão, por enquanto, de...'},
- {k:'apoio',t:'Minha rede de apoio',q:'Quem pode ser seu "padrinho/madrinha" nessa caminhada — alguém maduro que faça boas perguntas sem decidir por você? E quais amigos ajudarão a manter o rumo?',ph:'Pessoas com quem vou compartilhar este projeto...'}
+ {k:'historia',t:'Minha história',q:'Quem é você? Escreva livremente: sua história até aqui, suas forças, suas limitações. Lembre: a narrativa que você conta sobre si pode ser reescrita — você é o autor.',ph:'Minha história, minhas forças, minhas limitações...'},
+ {k:'valores',t:'Meus valores',q:'Quais valores você escolhe como bússola? Pense em 3 a 5 princípios dos quais não abre mão — e por quê.',ph:'Ex.: honestidade, serviço, família, liberdade...'},
+ {k:'mundo',t:'Meu mundo ao redor',q:'Análise prática do seu cenário: onde vive, com quem conta, quais oportunidades e obstáculos existem ao seu redor hoje?',ph:'Contexto, pessoas, oportunidades, obstáculos...'},
+ {k:'futuro',t:'O futuro desejado',q:'Daqui a 5, 10, até 20 anos, se tudo caminhar bem: onde você está? O que faz? Com quem? Escreva como se já estivesse vivendo esse futuro.',ph:'Daqui a alguns anos, eu...'},
+ {k:'escolhas',t:'As escolhas',q:'Todas as possibilidades estão abertas, mas não dá para atingir todas — é preciso escolher. Do futuro que descreveu, o que é essencial? O que você aceita deixar para depois?',ph:'O essencial para mim é... Abro mão, por ora, de...'},
+ {k:'apoio',t:'Minha rede de apoio',q:'Quem pode ser seu padrinho/madrinha — alguém maduro que faça boas perguntas sem decidir por você? Quais amigos ajudarão a manter o rumo? (Registre as pessoas na aba Planejar.)',ph:'Pessoas com quem vou compartilhar este projeto...'}
 ];
 let db=load();
-function load(){try{return JSON.parse(localStorage.getItem('pvpt'))||{}}catch(e){return{}}}
-function save(){localStorage.setItem('pvpt',JSON.stringify(db))}
-db.journey=db.journey||{};db.goals=db.goals||[];db.reviews=db.reviews||[];db.step=db.step||0;
+function load(){try{return JSON.parse(localStorage.getItem('pvpt2'))||{}}catch(e){return{}}}
+function save(){localStorage.setItem('pvpt2',JSON.stringify(db))}
+db.journey=db.journey||{};db.wheel=db.wheel||{};db.goals=db.goals||[];db.step=db.step||0;
+db.habits=db.habits||[];db.habitLog=db.habitLog||{};db.top3=db.top3||{};db.space=db.space||[];
+db.support=db.support||[];db.reviews=db.reviews||[];
 
-/* ---------- navegação ---------- */
+const esc=s=>{const d=document.createElement('div');d.textContent=s||'';return d.innerHTML};
+const todayKey=()=>new Date().toISOString().slice(0,10);
+function weekKey(d){d=d?new Date(d):new Date();const t=new Date(d);t.setHours(0,0,0,0);t.setDate(t.getDate()+3-((t.getDay()+6)%7));const w1=new Date(t.getFullYear(),0,4);return t.getFullYear()+'-S'+String(1+Math.round(((t-w1)/864e5-3+((w1.getDay()+6)%7))/7)).padStart(2,'0')}
+
+/* ================= navegação ================= */
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
   b.classList.add('active');
-  ['jornada','plano','tempo','revisao'].forEach(t=>document.getElementById('tab-'+t).classList.toggle('hidden',t!==b.dataset.tab));
+  ['descobrir','planejar','semana','constancia','revisar'].forEach(t=>document.getElementById('tab-'+t).classList.toggle('hidden',t!==b.dataset.tab));
   render();
 });
 
-/* ---------- jornada ---------- */
+/* ================= descobrir ================= */
 function renderJourney(){
-  const i=db.step, s=STEPS[Math.min(i,STEPS.length-1)];
-  document.getElementById('dots').innerHTML=STEPS.map((_,j)=>`<span class="${j<i?'done':j===i?'current':''}"></span>`).join('');
+  const i=db.step,s=STEPS[Math.min(i,STEPS.length-1)];
+  document.getElementById('dots').innerHTML=STEPS.map((_,j)=>`<span class="${j<i?'done':j===i?'current':''}" onclick="goStep(${j})"></span>`).join('');
   const box=document.getElementById('step-box');
   if(i>=STEPS.length){
-    box.innerHTML=`<h3>✅ Esboço concluído!</h3><p class="muted">Você completou a jornada de reflexão. Agora transforme o esboço em plano: vá para <b>Meu Plano</b> e crie metas nas seis áreas. Você pode voltar e revisar qualquer resposta quando quiser.</p>`;
+    box.innerHTML=`<h3>✅ Esboço concluído!</h3><p class="muted">Agora ajuste sua Roda da Vida abaixo e vá para <b>Planejar</b>: transforme o esboço em metas nas seis áreas. Você pode rever qualquer resposta clicando nos pontos acima.</p>`;
     document.getElementById('nextStep').classList.add('hidden');
   }else{
     document.getElementById('nextStep').classList.remove('hidden');
-    box.innerHTML=`<h3>${i+1}. ${s.t}</h3><p class="muted">${s.q}</p><textarea id="stepText" placeholder="${s.ph}">${db.journey[s.k]||''}</textarea>`;
+    box.innerHTML=`<h3>${i+1}. ${s.t}</h3><p class="muted">${s.q}</p><textarea id="stepText" placeholder="${s.ph}">${esc(db.journey[s.k])}</textarea>`;
   }
   document.getElementById('prevStep').style.visibility=i===0?'hidden':'visible';
 }
-document.getElementById('nextStep').onclick=()=>{
-  const s=STEPS[db.step]; if(s){db.journey[s.k]=document.getElementById('stepText').value}
-  db.step=Math.min(db.step+1,STEPS.length); save(); renderJourney();
-};
-document.getElementById('prevStep').onclick=()=>{
-  const s=STEPS[db.step]; if(s&&document.getElementById('stepText'))db.journey[s.k]=document.getElementById('stepText').value;
-  db.step=Math.max(db.step-1,0); save(); renderJourney();
-};
+window.goStep=j=>{saveStepText();db.step=j;save();renderJourney()};
+function saveStepText(){const s=STEPS[db.step];const el=document.getElementById('stepText');if(s&&el)db.journey[s.k]=el.value}
+document.getElementById('nextStep').onclick=()=>{saveStepText();db.step=Math.min(db.step+1,STEPS.length);save();renderJourney()};
+document.getElementById('prevStep').onclick=()=>{saveStepText();db.step=Math.max(db.step-1,0);save();renderJourney()};
 
-/* ---------- plano ---------- */
+function renderWheel(){
+  const sl=document.getElementById('wheelSliders');
+  sl.innerHTML=AREAS.map(a=>{
+    const v=db.wheel[a.id]??5;
+    return `<div class="slider-row"><div class="label">${a.n}</div><input type="range" min="0" max="10" value="${v}" oninput="setWheel('${a.id}',this.value)"><div class="val">${v}</div></div>`;
+  }).join('');
+  const svg=document.getElementById('wheelSvg'),cx=115,cy=115,R=95;
+  let grid='';
+  for(let r=1;r<=5;r++){grid+=`<circle cx="${cx}" cy="${cy}" r="${R*r/5}" fill="none" stroke="#e6e1d6"/>`}
+  let axes='',pts=[],labels='';
+  AREAS.forEach((a,i)=>{
+    const ang=-Math.PI/2+i*Math.PI*2/6;
+    const x=cx+R*Math.cos(ang),y=cy+R*Math.sin(ang);
+    axes+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="#e6e1d6"/>`;
+    const v=(db.wheel[a.id]??5)/10;
+    pts.push((cx+R*v*Math.cos(ang)).toFixed(1)+','+(cy+R*v*Math.sin(ang)).toFixed(1));
+    const lx=cx+(R+13)*Math.cos(ang),ly=cy+(R+13)*Math.sin(ang);
+    labels+=`<text x="${lx}" y="${ly}" font-size="9.5" text-anchor="middle" dominant-baseline="middle" fill="${a.hex}">${a.n}</text>`;
+  });
+  svg.innerHTML=grid+axes+`<polygon points="${pts.join(' ')}" fill="rgba(74,103,65,.25)" stroke="#4a6741" stroke-width="2"/>`+labels;
+}
+window.setWheel=(id,v)=>{db.wheel[id]=+v;save();renderWheel()};
+
+/* ================= planejar ================= */
 document.getElementById('gArea').innerHTML=AREAS.map(a=>`<option value="${a.id}">${a.n}</option>`).join('');
 document.getElementById('addGoal').onclick=()=>{
-  const t=document.getElementById('gTitle').value.trim(); if(!t)return alert('Escreva a meta.');
-  db.goals.push({id:Date.now(),area:document.getElementById('gArea').value,horizon:document.getElementById('gHorizon').value,title:t,step:document.getElementById('gStep').value.trim(),done:false});
-  document.getElementById('gTitle').value='';document.getElementById('gStep').value='';
-  save(); render();
+  const t=document.getElementById('gTitle').value.trim();if(!t)return alert('Escreva a meta.');
+  db.goals.push({id:Date.now(),area:document.getElementById('gArea').value,horizon:document.getElementById('gHorizon').value,
+    title:t,why:document.getElementById('gWhy').value.trim(),step:document.getElementById('gStep').value.trim(),
+    cha:document.getElementById('gCha').value.trim(),done:false});
+  ['gTitle','gWhy','gStep','gCha'].forEach(i=>document.getElementById(i).value='');
+  save();render();
 };
-function area(id){return AREAS.find(a=>a.id===id)}
+const area=id=>AREAS.find(a=>a.id===id);
 function renderPlan(){
-  const vals=db.journey.valores?`<b>Bússola de valores:</b> ${esc(db.journey.valores).slice(0,220)}`:'Complete a <b>Jornada</b> para trazer seus valores e seu futuro desejado para cá.';
+  const vals=db.journey.valores?`<b>Bússola de valores:</b> ${esc(db.journey.valores).slice(0,220)}`:'Complete a jornada em <b>Descobrir</b> para trazer seus valores e sua visão para cá.';
   document.getElementById('esbocoResumo').innerHTML='🧭 '+vals;
   document.getElementById('areaBars').innerHTML=AREAS.map(a=>{
     const n=db.goals.filter(g=>g.area===a.id).length;
     const max=Math.max(1,...AREAS.map(x=>db.goals.filter(g=>g.area===x.id).length));
     return `<div class="bar-row"><div class="label">${a.n}</div><div class="bar-track"><div class="bar-fill" style="width:${n/max*100}%;background:${a.c}"></div></div><div class="small muted">${n}</div></div>`;
   }).join('');
-  const list=document.getElementById('goalList');
-  list.innerHTML=db.goals.length?db.goals.map(g=>`
+  document.getElementById('goalList').innerHTML=db.goals.length?db.goals.map(g=>`
     <div class="goal ${g.done?'done':''}" style="border-left-color:${area(g.area).c}">
       <div class="top"><div><span class="area-chip" style="background:${area(g.area).c}">${area(g.area).n}</span><b class="g-title">${esc(g.title)}</b></div><span class="small muted">${g.horizon}</span></div>
-      ${g.step?`<div class="small muted">Primeiro passo: ${esc(g.step)}</div>`:''}
+      ${g.why?`<div class="small muted">💛 Por quê: ${esc(g.why)}</div>`:''}
+      ${g.step?`<div class="small muted">👣 Primeiro passo: ${esc(g.step)}</div>`:''}
+      ${g.cha?`<div class="small muted">🎓 Desenvolver: ${esc(g.cha)}</div>`:''}
       <div style="margin-top:8px">
         <button class="btn small secondary" onclick="toggleGoal(${g.id})">${g.done?'Reabrir':'Concluída ✓'}</button>
         <button class="btn small danger" onclick="delGoal(${g.id})">Excluir</button>
       </div>
     </div>`).join(''):'<p class="muted">Nenhuma meta ainda. Comece pequeno — uma meta em uma área já é um começo.</p>';
+  const order=['6 meses','1 ano','2 anos','3 anos','5 anos'],y=new Date().getFullYear();
+  const lbl={'6 meses':`${y} · em 6 meses`,'1 ano':`${y+1}`,'2 anos':`${y+2}`,'3 anos':`${y+3}`,'5 anos':`${y+5}`};
+  document.getElementById('timeline').innerHTML=order.map(h=>{
+    const gs=db.goals.filter(g=>g.horizon===h);if(!gs.length)return '';
+    return `<div class="tl-item"><div class="tl-year">${lbl[h]}</div>${gs.map(g=>`<div><span class="area-chip" style="background:${area(g.area).c}">${area(g.area).n}</span>${g.done?'✅ ':''}${esc(g.title)}</div>`).join('')}</div>`;
+  }).join('')||'<p class="muted">Crie metas acima para vê-las no tempo.</p>';
+  document.getElementById('supportList').innerHTML=db.support.length?db.support.map((p,i)=>`
+    <div class="support-person"><span>👤 <b>${esc(p.name)}</b> — <span class="muted small">${esc(p.role)}</span></span>
+    <button class="btn small danger" onclick="delSup(${i})">×</button></div>`).join('')
+    :'<p class="muted small">Ninguém registrado ainda. Compartilhar o projeto fortalece o rumo.</p>';
 }
 window.toggleGoal=id=>{const g=db.goals.find(x=>x.id===id);g.done=!g.done;save();render()};
 window.delGoal=id=>{if(confirm('Excluir esta meta?')){db.goals=db.goals.filter(x=>x.id!==id);save();render()}};
+document.getElementById('addSup').onclick=()=>{
+  const n=document.getElementById('supName').value.trim();if(!n)return;
+  db.support.push({name:n,role:document.getElementById('supRole').value});
+  document.getElementById('supName').value='';save();render();
+};
+window.delSup=i=>{db.support.splice(i,1);save();render()};
 
-/* ---------- linha do tempo ---------- */
-function renderTimeline(){
-  const order=['6 meses','1 ano','2 anos','3 anos','5 anos'];
-  const y=new Date().getFullYear();
-  const lbl={'6 meses':`${y} · em 6 meses`,'1 ano':`${y+1}`,'2 anos':`${y+2}`,'3 anos':`${y+3}`,'5 anos':`${y+5}`};
-  document.getElementById('timeline').innerHTML=order.map(h=>{
-    const gs=db.goals.filter(g=>g.horizon===h);
-    if(!gs.length)return '';
-    return `<div class="tl-item"><div class="tl-year">${lbl[h]}</div>${gs.map(g=>`<div><span class="area-chip" style="background:${area(g.area).c}">${area(g.area).n}</span>${g.done?'✅ ':''}${esc(g.title)}</div>`).join('')}</div>`;
-  }).join('')||'<p class="muted">Crie metas em <b>Meu Plano</b> para vê-las aqui.</p>';
+/* ================= semana ================= */
+function curTop3(){const k=weekKey();db.top3[k]=db.top3[k]||[];return db.top3[k]}
+function renderWeek(){
+  document.getElementById('weekLabel').textContent='· '+weekKey();
+  document.getElementById('todayLabel').textContent='· '+new Date().toLocaleDateString('pt-BR');
+  document.getElementById('t3Goal').innerHTML='<option value="">(sem meta ligada)</option>'+db.goals.filter(g=>!g.done).map(g=>`<option value="${g.id}">${esc(g.title)}</option>`).join('');
+  const list=curTop3();
+  document.getElementById('top3List').innerHTML=list.length?list.map((t,i)=>`
+    <div class="top3-item ${t.done?'done':''}"><input type="checkbox" ${t.done?'checked':''} onchange="toggleT3(${i})">
+    <div style="flex:1"><span class="t">${esc(t.text)}</span>${t.goalId?`<div class="small muted">🎯 ${esc((db.goals.find(g=>g.id==t.goalId)||{}).title||'')}</div>`:''}</div>
+    <button class="btn small danger" onclick="delT3(${i})">×</button></div>`).join('')
+    :'<p class="muted small">Nada escolhido ainda. Reveja suas metas e escolha até 3 ações para esta semana.</p>';
+  const today=todayKey();db.habitLog[today]=db.habitLog[today]||{};
+  document.getElementById('habitList').innerHTML=db.habits.length?db.habits.map((h,i)=>`
+    <div class="habit"><input type="checkbox" ${db.habitLog[today][h]?'checked':''} onchange="toggleHabit('${esc(h)}')">
+    <span class="name">${esc(h)}</span><span class="streak">🔥 ${habitStreak(h)}d</span>
+    <button class="btn small danger" onclick="delHabit(${i})">×</button></div>`).join('')
+    :'<p class="muted small">Nenhum hábito ainda. Pequeno e diário vence grande e raro.</p>';
+  ['parar','delegar','comecar'].forEach(t=>{
+    document.getElementById('sp-'+t).innerHTML=db.space.filter(s=>s.type===t).map((s)=>`<li>${esc(s.text)}<button onclick="delSpace(${db.space.indexOf(s)})">×</button></li>`).join('')||'<li class="muted small">—</li>';
+  });
+}
+document.getElementById('addTop3').onclick=()=>{
+  const t=document.getElementById('t3Text').value.trim();if(!t)return;
+  const list=curTop3();if(list.length>=3)return alert('Top 3 é top 3: conclua ou remova um item antes de adicionar outro. Foco é força!');
+  list.push({text:t,goalId:document.getElementById('t3Goal').value||null,done:false});
+  document.getElementById('t3Text').value='';save();render();
+};
+window.toggleT3=i=>{const l=curTop3();l[i].done=!l[i].done;save();render()};
+window.delT3=i=>{curTop3().splice(i,1);save();render()};
+document.getElementById('addHabit').onclick=()=>{
+  const n=document.getElementById('habName').value.trim();if(!n)return;
+  if(!db.habits.includes(n))db.habits.push(n);
+  document.getElementById('habName').value='';save();render();
+};
+window.delHabit=i=>{if(confirm('Remover este hábito? O histórico é mantido.')){db.habits.splice(i,1);save();render()}};
+window.toggleHabit=h=>{const t=todayKey();db.habitLog[t]=db.habitLog[t]||{};db.habitLog[t][h]=!db.habitLog[t][h];save();render()};
+document.getElementById('addSpace').onclick=()=>{
+  const t=document.getElementById('spText').value.trim();if(!t)return;
+  db.space.push({text:t,type:document.getElementById('spType').value});
+  document.getElementById('spText').value='';save();render();
+};
+window.delSpace=i=>{db.space.splice(i,1);save();render()};
+function habitStreak(h){
+  let n=0,d=new Date();
+  if(!(db.habitLog[todayKey()]||{})[h])d.setDate(d.getDate()-1);
+  while((db.habitLog[d.toISOString().slice(0,10)]||{})[h]){n++;d.setDate(d.getDate()-1)}
+  return n;
 }
 
-/* ---------- revisões ---------- */
+/* ================= constância ================= */
+function renderKpis(){
+  let dayStreak=0,d=new Date();
+  const doneDay=k=>db.habits.length&&db.habits.every(h=>(db.habitLog[k]||{})[h]);
+  if(!doneDay(todayKey()))d.setDate(d.getDate()-1);
+  while(doneDay(d.toISOString().slice(0,10))){dayStreak++;d.setDate(d.getDate()-1)}
+  const weeksReviewed=db.reviews.filter(r=>r.type==='semana').length;
+  const vigils=db.reviews.filter(r=>r.type==='vigilia').length;
+  const goalsDone=db.goals.filter(g=>g.done).length;
+  document.getElementById('kpiGrid').innerHTML=`
+    <div class="kpi"><div class="num">🔥 ${dayStreak}</div><div class="lbl">dias seguidos com todos os hábitos</div></div>
+    <div class="kpi"><div class="num">${weeksReviewed}</div><div class="lbl">semanas fechadas com revisão</div></div>
+    <div class="kpi"><div class="num">${vigils}</div><div class="lbl">vigílias realizadas</div></div>
+    <div class="kpi"><div class="num">${goalsDone}/${db.goals.length}</div><div class="lbl">metas concluídas</div></div>`;
+  const msgs=[
+    'Constância vale mais que intensidade. Apareça hoje.',
+    'O platô não é falta de progresso — é onde o progresso se consolida.',
+    'Pequenas repetições diárias constroem a vida épica que você desenhou.',
+    'Revisar não é recomeçar do zero: é ajustar o leme.'];
+  document.getElementById('plateauMsg').textContent='🌱 '+msgs[new Date().getDate()%msgs.length];
+  const now=new Date(),mk=now.toISOString().slice(0,7);
+  let days=0,daysDone=0;
+  for(let i=1;i<=now.getDate();i++){
+    const k=mk+'-'+String(i).padStart(2,'0');days++;
+    if(db.habits.length&&db.habits.some(h=>(db.habitLog[k]||{})[h]))daysDone++;
+  }
+  const pct=days?Math.round(daysDone/days*100):0;
+  const t3=db.top3[weekKey()]||[],t3pct=t3.length?Math.round(t3.filter(x=>x.done).length/t3.length*100):0;
+  document.getElementById('monthBars').innerHTML=`
+    <div class="bar-row"><div class="label">Hábitos no mês</div><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:var(--accent)"></div></div><div class="small muted">${pct}%</div></div>
+    <div class="bar-row"><div class="label">Top 3 da semana</div><div class="bar-track"><div class="bar-fill" style="width:${t3pct}%;background:var(--accent2)"></div></div><div class="small muted">${t3pct}%</div></div>`;
+}
+
+/* ================= revisar ================= */
 function renderReviews(){
   const box=document.getElementById('nextRevBox');
   if(db.nextReview){
     const d=new Date(db.nextReview+'T00:00'),today=new Date();today.setHours(0,0,0,0);
     const diff=Math.round((d-today)/864e5);
-    box.innerHTML=diff<0?`<div class="banner">⏰ <b>Sua revisão está atrasada ${-diff} dia(s).</b> Que tal fazê-la agora, logo abaixo?</div>`
-      :diff===0?`<div class="banner">🌟 <b>Hoje é dia de revisão do seu projeto de vida!</b></div>`
-      :`<div class="banner">📅 Próxima revisão em <b>${diff} dia(s)</b> (${d.toLocaleDateString('pt-BR')}).</div>`;
-  }else box.innerHTML='<div class="banner">Nenhuma revisão agendada. Sugestão: a cada 3 meses.</div>';
+    box.innerHTML=diff<0?`<div class="banner">⏰ <b>Sua vigília está atrasada ${-diff} dia(s).</b> Reserve um tempo de qualidade — ela merece.</div>`
+      :diff===0?`<div class="banner">🌟 <b>Hoje é dia de vigília!</b> Um encontro seu com você.</div>`
+      :`<div class="banner">📅 Próxima vigília em <b>${diff} dia(s)</b> (${d.toLocaleDateString('pt-BR')}).</div>`;
+  }else box.innerHTML='<div class="banner">Nenhuma vigília agendada. Sugestão: a cada 3 meses.</div>';
   document.getElementById('revLog').innerHTML=db.reviews.length?[...db.reviews].reverse().map(r=>`
-    <div class="rev-log"><b>${new Date(r.date).toLocaleDateString('pt-BR')}</b>
+    <div class="rev-log"><b>${r.type==='vigilia'?'🕯️ Vigília':'📆 Semana'}</b> — ${new Date(r.date).toLocaleDateString('pt-BR')}
     ${r.wins?`<div class="small"><b>Avanços:</b> ${esc(r.wins)}</div>`:''}
     ${r.changes?`<div class="small"><b>Ajustes:</b> ${esc(r.changes)}</div>`:''}
+    ${r.goals?`<div class="small"><b>Metas:</b> ${esc(r.goals)}</div>`:''}
     ${r.next?`<div class="small"><b>Rumo:</b> ${esc(r.next)}</div>`:''}</div>`).join('')
     :'<p class="muted">Nenhuma revisão registrada ainda.</p>';
 }
 document.getElementById('saveRevDate').onclick=()=>{
-  const v=document.getElementById('revDate').value; if(!v)return alert('Escolha uma data.');
+  const v=document.getElementById('revDate').value;if(!v)return alert('Escolha uma data.');
   db.nextReview=v;save();render();
 };
-document.getElementById('saveReview').onclick=()=>{
-  const wins=document.getElementById('revWins').value.trim(),changes=document.getElementById('revChanges').value.trim(),next=document.getElementById('revNext').value.trim();
-  if(!wins&&!changes&&!next)return alert('Escreva pelo menos um campo.');
-  db.reviews.push({date:new Date().toISOString(),wins,changes,next});
+document.getElementById('saveWeekReview').onclick=()=>{
+  const wins=document.getElementById('revWins').value.trim(),changes=document.getElementById('revChanges').value.trim();
+  if(!wins&&!changes)return alert('Escreva pelo menos um campo.');
+  db.reviews.push({type:'semana',date:new Date().toISOString(),wins,changes});
+  ['revWins','revChanges'].forEach(i=>document.getElementById(i).value='');
+  save();render();alert('Semana fechada! Escolha o top 3 da próxima na aba Semana.');
+};
+document.getElementById('saveVigil').onclick=()=>{
+  const changes=document.getElementById('vigChanges').value.trim(),goals=document.getElementById('vigGoals').value.trim(),next=document.getElementById('vigNext').value.trim();
+  if(!changes&&!goals&&!next)return alert('Escreva pelo menos um campo.');
+  db.reviews.push({type:'vigilia',date:new Date().toISOString(),changes,goals,next});
   const d=new Date();d.setMonth(d.getMonth()+3);db.nextReview=d.toISOString().slice(0,10);
-  ['revWins','revChanges','revNext'].forEach(i=>document.getElementById(i).value='');
-  save();render();alert('Revisão registrada! Próxima sugerida daqui a 3 meses — ajuste a data se quiser.');
+  ['vigChanges','vigGoals','vigNext'].forEach(i=>document.getElementById(i).value='');
+  save();render();alert('Vigília registrada! Próxima sugerida daqui a 3 meses — ajuste a data se quiser.');
 };
 
-/* ---------- dados ---------- */
+/* ================= dados ================= */
 document.getElementById('exportBtn').onclick=()=>{
   const a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob([JSON.stringify(db,null,2)],{type:'application/json'}));
@@ -301,12 +519,15 @@ document.getElementById('exportBtn').onclick=()=>{
 document.getElementById('importBtn').onclick=()=>document.getElementById('importFile').click();
 document.getElementById('importFile').onchange=e=>{
   const f=e.target.files[0];if(!f)return;
-  const r=new FileReader();r.onload=()=>{try{db=JSON.parse(r.result);db.journey=db.journey||{};db.goals=db.goals||[];db.reviews=db.reviews||[];db.step=db.step||0;save();render();alert('Dados importados!')}catch(err){alert('Arquivo inválido.')}};r.readAsText(f);
+  const r=new FileReader();r.onload=()=>{try{db=JSON.parse(r.result);
+    db.journey=db.journey||{};db.wheel=db.wheel||{};db.goals=db.goals||[];db.step=db.step||0;
+    db.habits=db.habits||[];db.habitLog=db.habitLog||{};db.top3=db.top3||{};db.space=db.space||[];
+    db.support=db.support||[];db.reviews=db.reviews||[];
+    save();render();alert('Dados importados!')}catch(err){alert('Arquivo inválido.')}};r.readAsText(f);
 };
-document.getElementById('resetBtn').onclick=()=>{if(confirm('Apagar TODOS os dados deste dispositivo?')){localStorage.removeItem('pvpt');db={journey:{},goals:[],reviews:[],step:0};render()}};
+document.getElementById('resetBtn').onclick=()=>{if(confirm('Apagar TODOS os dados deste dispositivo?')){localStorage.removeItem('pvpt2');db={journey:{},wheel:{},goals:[],step:0,habits:[],habitLog:{},top3:{},space:[],support:[],reviews:[]};render()}};
 
-function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
-function render(){renderJourney();renderPlan();renderTimeline();renderReviews()}
+function render(){renderJourney();renderWheel();renderPlan();renderWeek();renderKpis();renderReviews()}
 render();
 </script>
 </body>
