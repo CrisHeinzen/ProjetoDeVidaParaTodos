@@ -1,5 +1,7 @@
 # Projeto de Vida para Todos
 
+🌐 **Acesse o app:** https://crisheinzen.github.io/ProjetoDeVidaParaTodos/
+
 App que leva a qualquer pessoa a metodologia de **Projeto de Vida** do Ramo Pioneiro dos Escoteiros do Brasil — o Plano de Desenvolvimento Pessoal (PDP), usado há décadas para ajudar jovens de 18 a 21 anos a construir, por escrito, um projeto para a própria vida.
 
 ## Por que "para todos"
@@ -27,7 +29,7 @@ O método escoteiro reserva essa ferramenta aos pioneiros, mas seus princípios 
 
 ## Como usar
 
-Abra o `index.html` em qualquer navegador. Não requer servidor nem instalação; os dados ficam no localStorage do navegador.
+Abra o `index.html` em qualquer navegador. Não requer servidor nem instalação; os dados ficam no localStorage do navegador. Ou use direto online, sem instalar nada: https://crisheinzen.github.io/ProjetoDeVidaParaTodos/
 
 ## Status
 
