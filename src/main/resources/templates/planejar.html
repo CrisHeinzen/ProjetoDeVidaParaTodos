@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragmentos/layout :: pagina('planejar', ~{::main})}">
+<body>
+<main>
+  <div class="banner">
+    🧭
+    <th:block th:if="${!#strings.isEmpty(valores)}"><b>Bússola de valores:</b> <span th:text="${#strings.abbreviate(valores, 220)}"></span></th:block>
+    <th:block th:if="${#strings.isEmpty(valores)}">Complete a jornada em <b>Descobrir</b> para trazer seus valores e sua visão para cá.</th:block>
+  </div>
+
+  <div class="card">
+    <h2>Metas nas 6 áreas</h2>
+    <p class="muted">Um projeto equilibrado cuida das seis áreas do desenvolvimento humano. Metas claras, com prazo,
+      um porquê e um primeiro passo.</p>
+    <div class="bars">
+      <div class="bar-row" th:each="b : ${barras}">
+        <div class="label" th:text="${b.area.nome}"></div>
+        <div class="bar-track"><div class="bar-fill" th:style="|width:${b.percentual}%;background:${b.area.cor}|"></div></div>
+        <div class="small muted" th:text="${b.quantidade}"></div>
+      </div>
+    </div>
+
+    <h3>Nova meta</h3>
+    <form method="post" th:action="@{/planejar/metas}">
+      <div class="flex">
+        <div><label class="small muted">Área</label>
+          <select name="area"><option th:each="a : ${areas}" th:value="${a}" th:text="${a.nome}"></option></select></div>
+        <div><label class="small muted">Horizonte</label>
+          <select name="horizonte"><option th:each="h : ${horizontes}" th:value="${h}" th:text="${h.rotulo}"></option></select></div>
+      </div>
+      <label class="small muted">Meta (específica e mensurável)</label>
+      <input type="text" name="titulo" required placeholder="Ex.: correr 10 km, concluir a graduação, ler 12 livros...">
+      <label class="small muted">Por que ela importa? (ligue a um valor seu ou à sua visão)</label>
+      <input type="text" name="porque" placeholder="Ex.: saúde para acompanhar meus filhos crescendo">
+      <label class="small muted">Primeiro passo concreto (esta semana)</label>
+      <input type="text" name="primeiroPasso" placeholder="Qual é a menor ação possível?">
+      <label class="small muted">O que preciso desenvolver? (conhecimento · habilidade · atitude — opcional)</label>
+      <input type="text" name="cha" placeholder="Ex.: aprender inglês (C), treinar oratória (H), pedir ajuda (A)">
+      <button class="btn" type="submit">Adicionar meta</button>
+    </form>
+  </div>
+
+  <div class="card" id="metas">
+    <h2>Minhas metas</h2>
+    <p class="muted" th:if="${metas.isEmpty()}">Nenhuma meta ainda. Comece pequeno — uma meta em uma área já é um começo.</p>
+    <div class="goal" th:each="m : ${metas}" th:classappend="${m.concluida} ? 'done'" th:style="|border-left-color:${m.area.cor}|">
+      <div class="top">
+        <div><span class="area-chip" th:style="|background:${m.area.cor}|" th:text="${m.area.nome}"></span><b class="g-title" th:text="${m.titulo}"></b></div>
+        <span class="small muted" th:text="${m.horizonte.rotulo}"></span>
+      </div>
+      <div class="small muted" th:if="${!#strings.isEmpty(m.porque)}">💛 Por quê: <span th:text="${m.porque}"></span></div>
+      <div class="small muted" th:if="${!#strings.isEmpty(m.primeiroPasso)}">👣 Primeiro passo: <span th:text="${m.primeiroPasso}"></span></div>
+      <div class="small muted" th:if="${!#strings.isEmpty(m.cha)}">🎓 Desenvolver: <span th:text="${m.cha}"></span></div>
+      <div style="margin-top:8px">
+        <form class="inline" method="post" th:action="@{/planejar/metas/{id}/alternar(id=${m.id})}">
+          <button class="btn small secondary" type="submit" th:text="${m.concluida} ? 'Reabrir' : 'Concluída ✓'"></button>
+        </form>
+        <form class="inline" method="post" th:action="@{/planejar/metas/{id}/excluir(id=${m.id})}"
+              onsubmit="return confirm('Excluir esta meta?')">
+          <button class="btn small danger" type="submit">Excluir</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Linha do tempo — próximos 5 anos</h2>
+    <p class="muted" th:if="${linhaDoTempo.isEmpty()}">Crie metas acima para vê-las no tempo.</p>
+    <div class="timeline" th:unless="${linhaDoTempo.isEmpty()}">
+      <div class="tl-item" th:each="g : ${linhaDoTempo}">
+        <div class="tl-year" th:text="${g.rotulo}"></div>
+        <div th:each="m : ${g.metas}">
+          <span class="area-chip" th:style="|background:${m.area.cor}|" th:text="${m.area.nome}"></span><span th:if="${m.concluida}">✅ </span><span th:text="${m.titulo}"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="apoio">
+    <h2>Minha rede de apoio</h2>
+    <p class="muted small">Um projeto compartilhado é mais forte. Quem conhece o seu? Um padrinho/madrinha que faz boas
+      perguntas, amigos que ajudam a manter o rumo.</p>
+    <p class="muted small" th:if="${pessoas.isEmpty()}">Ninguém registrado ainda. Compartilhar o projeto fortalece o rumo.</p>
+    <div class="support-person" th:each="p : ${pessoas}">
+      <span>👤 <b th:text="${p.nome}"></b> — <span class="muted small" th:text="${p.papel}"></span></span>
+      <form class="inline" method="post" th:action="@{/planejar/apoio/{id}/excluir(id=${p.id})}">
+        <button class="btn small danger" type="submit" title="Remover">×</button>
+      </form>
+    </div>
+    <form method="post" th:action="@{/planejar/apoio}">
+      <div class="flex">
+        <input type="text" name="nome" required placeholder="Nome">
+        <select name="papel"><option th:each="papel : ${papeis}" th:text="${papel}" th:value="${papel}"></option></select>
+      </div>
+      <button class="btn secondary" type="submit">Adicionar pessoa</button>
+    </form>
+  </div>
+</main>
+</body>
+</html>

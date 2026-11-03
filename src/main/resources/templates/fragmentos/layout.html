@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" th:fragment="pagina(aba, conteudo)">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projeto de Vida para Todos</title>
+<link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<header>
+  <h1>🛶 Projeto de Vida para Todos</h1>
+  <p>"Toma tua própria canoa e rema." — Baden-Powell</p>
+</header>
+
+<nav>
+  <a th:href="@{/descobrir}" th:classappend="${aba == 'descobrir'} ? 'active'">1 · Descobrir</a>
+  <a th:href="@{/planejar}" th:classappend="${aba == 'planejar'} ? 'active'">2 · Planejar</a>
+  <a th:href="@{/semana}" th:classappend="${aba == 'semana'} ? 'active'">3 · Semana</a>
+  <a th:href="@{/constancia}" th:classappend="${aba == 'constancia'} ? 'active'">4 · Constância</a>
+  <a th:href="@{/revisar}" th:classappend="${aba == 'revisar'} ? 'active'">5 · Revisar</a>
+</nav>
+
+<div class="avisos" th:if="${mensagem != null or erro != null}">
+  <div class="banner ok" th:if="${mensagem}" th:text="${mensagem}"></div>
+  <div class="banner erro" th:if="${erro}" th:text="${erro}"></div>
+</div>
+
+<main th:replace="${conteudo}"></main>
+
+<footer>
+  Inspirado no Plano de Desenvolvimento Pessoal do Ramo Pioneiro (Escoteiros do Brasil),<br>
+  com práticas de execução e constância de métodos de produtividade e desenvolvimento pessoal.
+</footer>
+</body>
+</html>

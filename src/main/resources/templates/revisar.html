@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragmentos/layout :: pagina('revisar', ~{::main})}">
+<body>
+<main>
+  <div class="card">
+    <h2>O ciclo que nunca termina</h2>
+    <p class="muted">Um projeto de vida não é um documento — é um hábito. Feche a semana com uma revisão leve; a cada
+      3 meses, faça uma vigília profunda.</p>
+    <div class="banner" th:unless="${status.agendada()}">Nenhuma vigília agendada. Sugestão: a cada 3 meses.</div>
+    <th:block th:if="${status.agendada()}">
+      <div class="banner" th:if="${status.dias < 0}">⏰ <b th:text="|Sua vigília está atrasada ${-status.dias} dia(s).|"></b> Reserve um tempo de qualidade — ela merece.</div>
+      <div class="banner" th:if="${status.dias == 0}">🌟 <b>Hoje é dia de vigília!</b> Um encontro seu com você.</div>
+      <div class="banner" th:if="${status.dias > 0}">📅 Próxima vigília em <b th:text="|${status.dias} dia(s)|"></b> (<span th:text="${dataVigilia}"></span>).</div>
+    </th:block>
+    <form method="post" th:action="@{/revisar/agendar}">
+      <label class="small muted">Agendar próxima vigília (revisão profunda)</label>
+      <input type="date" name="data" required th:value="${status.data}">
+      <button class="btn" type="submit">Agendar</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h2>Revisão da semana (leve)</h2>
+    <form method="post" th:action="@{/revisar/semana}">
+      <label class="small muted">O que avançou nesta semana?</label>
+      <textarea name="avancos"></textarea>
+      <label class="small muted">O que travou? O que ajustar?</label>
+      <textarea name="ajustes"></textarea>
+      <button class="btn" type="submit">Fechar a semana</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h2>Vigília (revisão profunda)</h2>
+    <p class="quote">"Promover a revisão de seu Projeto de Vida, projetando o caminho que pretende seguir para atingir aquilo que se propôs."</p>
+    <form method="post" th:action="@{/revisar/vigilia}">
+      <label class="small muted">Relendo minha jornada e minha visão: o que mudou em mim ou ao meu redor?</label>
+      <textarea name="mudancas"></textarea>
+      <label class="small muted">Minhas metas ainda apontam para o futuro que eu quero? O que reformular?</label>
+      <textarea name="metas"></textarea>
+      <label class="small muted">Qual é o rumo para o próximo trimestre?</label>
+      <textarea name="rumo"></textarea>
+      <button class="btn" type="submit">Registrar vigília</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h2>Histórico</h2>
+    <p class="muted" th:if="${historico.isEmpty()}">Nenhuma revisão registrada ainda.</p>
+    <div class="rev-log" th:each="r : ${historico}">
+      <b th:text="${r.titulo}"></b> — <span th:text="${r.data}"></span>
+      <div class="small" th:if="${!#strings.isEmpty(r.avancos)}"><b>Avanços:</b> <span th:text="${r.avancos}"></span></div>
+      <div class="small" th:if="${!#strings.isEmpty(r.ajustes)}"><b>Ajustes:</b> <span th:text="${r.ajustes}"></span></div>
+      <div class="small" th:if="${!#strings.isEmpty(r.metas)}"><b>Metas:</b> <span th:text="${r.metas}"></span></div>
+      <div class="small" th:if="${!#strings.isEmpty(r.rumo)}"><b>Rumo:</b> <span th:text="${r.rumo}"></span></div>
+    </div>
+  </div>
+
+  <div class="card" id="dados">
+    <h2>Seus dados</h2>
+    <p class="muted small">Os dados ficam no banco de dados do servidor onde o app roda (por padrão, a pasta
+      <code>dados/</code>). Exporte um backup quando quiser. A importação aceita também backups da versão web antiga.</p>
+    <div class="flex">
+      <a class="btn secondary" th:href="@{/dados/exportar}" style="text-align:center;text-decoration:none">Exportar (JSON)</a>
+    </div>
+    <form method="post" th:action="@{/dados/importar}" enctype="multipart/form-data"
+          onsubmit="return confirm('Importar substitui TODOS os dados atuais. Continuar?')">
+      <input type="file" name="arquivo" accept=".json,application/json" required style="margin-top:12px">
+      <button class="btn secondary" type="submit">Importar</button>
+    </form>
+    <form method="post" th:action="@{/dados/apagar}" onsubmit="return confirm('Apagar TODOS os dados?')">
+      <button class="btn danger" type="submit">Apagar tudo</button>
+    </form>
+  </div>
+</main>
+</body>
+</html>

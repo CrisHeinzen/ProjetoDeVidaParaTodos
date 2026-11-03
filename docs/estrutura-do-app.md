@@ -56,7 +56,8 @@ Passos (cada um salvo como texto livre):
 
 ## Dados
 
-- `localStorage` (chave `pvpt2`), arquivo único `index.html`, sem servidor.
+- **Versão Java (atual):** Spring Boot + JPA; banco H2 em arquivo por padrão, PostgreSQL opcional (perfil `postgres`). Export/import JSON no mesmo formato da versão web.
+- **Versão web (legada):** `localStorage` (chave `pvpt2`), arquivo único `index.html`, sem servidor.
 - Export/import JSON (backup e portabilidade).
 - Redesign v2: sem migração automática do formato v1 (decisão de 12/08/2026); usuários v1 podem exportar o JSON antigo.
 

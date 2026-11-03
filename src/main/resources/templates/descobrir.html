@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragmentos/layout :: pagina('descobrir', ~{::main})}">
+<body>
+<main>
+  <div class="card">
+    <h2>A jornada de reflexão</h2>
+    <p class="muted">Antes do plano, vem o esboço. Ninguém decide por você — estas perguntas só iluminam o caminho.</p>
+
+    <form method="post" th:action="@{/descobrir/passo}">
+      <input type="hidden" name="passo" th:value="${passoAtual}">
+
+      <div class="progress-dots">
+        <button th:each="p, st : ${passos}" type="submit" name="destino" th:value="${st.index}" th:title="${p.titulo}"
+                th:classappend="${st.index < passoAtual ? 'done' : (st.index == passoAtual ? 'current' : '')}"></button>
+      </div>
+
+      <div th:if="${concluida}">
+        <h3>✅ Esboço concluído!</h3>
+        <p class="muted">Agora ajuste sua Roda da Vida abaixo e vá para <b>Planejar</b>: transforme o esboço em metas
+          nas seis áreas. Você pode rever qualquer resposta clicando nos pontos acima.</p>
+      </div>
+
+      <div th:unless="${concluida}">
+        <h3 th:text="|${passoAtual + 1}. ${passo.titulo}|">1. Minha história</h3>
+        <p class="muted" th:text="${passo.pergunta}"></p>
+        <textarea name="texto" th:placeholder="${passo.exemplo}" th:text="${resposta}"></textarea>
+      </div>
+
+      <div class="flex">
+        <button class="btn secondary" type="submit" name="destino" th:value="${passoAtual - 1}"
+                th:if="${passoAtual > 0}">← Anterior</button>
+        <button class="btn" type="submit" name="destino" th:value="${passoAtual + 1}"
+                th:unless="${concluida}">Salvar e avançar →</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="card" id="roda">
+    <h2>Roda da Vida — seu diagnóstico</h2>
+    <p class="muted small">De 0 a 10, como está cada área da sua vida hoje? Este é o retrato do ponto de partida
+      (ponto A). O plano constrói a ponte até o ponto B.</p>
+    <div class="wheel-wrap">
+      <div th:utext="${svgRoda}"></div>
+      <form class="wheel-sliders" method="post" th:action="@{/descobrir/roda}">
+        <div class="slider-row" th:each="entrada : ${notas}">
+          <div class="label" th:text="${entrada.key.nome}"></div>
+          <input type="range" min="0" max="10" th:name="|nota_${entrada.key.codigo}|" th:value="${entrada.value}"
+                 oninput="this.nextElementSibling.value=this.value">
+          <output class="val" th:text="${entrada.value}"></output>
+        </div>
+        <button class="btn" type="submit">Salvar roda</button>
+      </form>
+    </div>
+  </div>
+</main>
+</body>
+</html>

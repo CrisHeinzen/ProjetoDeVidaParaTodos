@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragmentos/layout :: pagina('semana', ~{::main})}">
+<body>
+<main>
+  <div class="card">
+    <h2>Top 3 da semana <span class="small muted" th:text="|· ${semana}|"></span></h2>
+    <p class="muted small">Foco é força: escolha até 3 ações que fazem suas metas avançarem nesta semana. Menos é mais.</p>
+    <p class="muted small" th:if="${top3.isEmpty()}">Nada escolhido ainda. Reveja suas metas e escolha até 3 ações para esta semana.</p>
+    <div class="top3-item" th:each="t : ${top3}" th:classappend="${t.concluido} ? 'done'">
+      <form class="inline" method="post" th:action="@{/semana/top3/{id}/alternar(id=${t.id})}">
+        <button class="check" type="submit" th:classappend="${t.concluido} ? 'on'" th:text="${t.concluido} ? '✓' : ''"
+                th:title="${t.concluido} ? 'Desmarcar' : 'Marcar como feito'"></button>
+      </form>
+      <div style="flex:1">
+        <span class="t" th:text="${t.texto}"></span>
+        <div class="small muted" th:if="${t.metaId != null and titulosMetas.containsKey(t.metaId)}">🎯 <span th:text="${titulosMetas.get(t.metaId)}"></span></div>
+      </div>
+      <form class="inline" method="post" th:action="@{/semana/top3/{id}/excluir(id=${t.id})}">
+        <button class="btn small danger" type="submit" title="Remover">×</button>
+      </form>
+    </div>
+    <form method="post" th:action="@{/semana/top3}">
+      <div class="flex">
+        <input type="text" name="texto" required placeholder="Ação da semana (ligada a uma meta, se possível)">
+        <select name="metaId">
+          <option value="">(sem meta ligada)</option>
+          <option th:each="m : ${metasAbertas}" th:value="${m.id}" th:text="${m.titulo}"></option>
+        </select>
+      </div>
+      <button class="btn" type="submit">Adicionar ao top 3</button>
+    </form>
+  </div>
+
+  <div class="card" id="habitos">
+    <h2>Hábitos de hoje <span class="small muted" th:text="|· ${hoje}|"></span></h2>
+    <p class="muted small">Disciplina é um músculo: treina-se com repetições pequenas e diárias.</p>
+    <p class="muted small" th:if="${habitos.isEmpty()}">Nenhum hábito ainda. Pequeno e diário vence grande e raro.</p>
+    <div class="habit" th:each="h : ${habitos}" th:with="feito=${cumpridosHoje.contains(h.nome)}">
+      <form class="inline" method="post" th:action="@{/semana/habitos/{id}/alternar(id=${h.id})}">
+        <button class="check" type="submit" th:classappend="${feito} ? 'on'" th:text="${feito} ? '✓' : ''"
+                th:title="${feito} ? 'Desmarcar' : 'Marcar como feito hoje'"></button>
+      </form>
+      <span class="name" th:text="${h.nome}"></span>
+      <span class="streak" th:text="|🔥 ${sequencias.get(h.nome)}d|"></span>
+      <form class="inline" method="post" th:action="@{/semana/habitos/{id}/excluir(id=${h.id})}"
+            onsubmit="return confirm('Remover este hábito? O histórico é mantido.')">
+        <button class="btn small danger" type="submit" title="Remover">×</button>
+      </form>
+    </div>
+    <form method="post" th:action="@{/semana/habitos}">
+      <div class="flex"><input type="text" name="nome" required placeholder="Novo hábito diário (ex.: caminhar 20 min, ler 10 páginas)"></div>
+      <button class="btn secondary" type="submit">Adicionar hábito</button>
+    </form>
+  </div>
+
+  <div class="card" id="espaco">
+    <h2>Abrir espaço livre</h2>
+    <p class="muted small">Antes de acrescentar, remova. O que você precisa <b>parar</b>, <b>delegar</b> ou <b>começar</b>?</p>
+    <form method="post" th:action="@{/semana/espaco}">
+      <div class="flex">
+        <input type="text" name="texto" required placeholder="Ex.: rolagem infinita à noite">
+        <select name="tipo"><option th:each="t : ${tiposEspaco}" th:value="${t.codigo}" th:text="${t.titulo}"></option></select>
+      </div>
+      <button class="btn secondary" type="submit">Registrar</button>
+    </form>
+    <div class="space-cols">
+      <div class="space-col" th:each="t : ${tiposEspaco}">
+        <h4 th:text="${t.titulo}"></h4>
+        <ul>
+          <li class="muted small" th:if="${espaco.get(t).isEmpty()}">—</li>
+          <li th:each="item : ${espaco.get(t)}">
+            <span th:text="${item.texto}"></span>
+            <form method="post" th:action="@{/semana/espaco/{id}/excluir(id=${item.id})}"><button type="submit" title="Remover">×</button></form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragmentos/layout :: pagina('constancia', ~{::main})}">
+<body>
+<main th:with="p=${painel}">
+  <div class="card">
+    <h2>Placar da constância</h2>
+    <p class="quote">A maestria mora no platô: os dias comuns, repetidos com carinho, são o próprio caminho.</p>
+    <div class="kpi-grid">
+      <div class="kpi"><div class="num" th:text="|🔥 ${p.diasSeguidos}|"></div><div class="lbl">dias seguidos com todos os hábitos</div></div>
+      <div class="kpi"><div class="num" th:text="${p.semanasRevisadas}"></div><div class="lbl">semanas fechadas com revisão</div></div>
+      <div class="kpi"><div class="num" th:text="${p.vigilias}"></div><div class="lbl">vigílias realizadas</div></div>
+      <div class="kpi"><div class="num" th:text="|${p.metasConcluidas}/${p.totalMetas}|"></div><div class="lbl">metas concluídas</div></div>
+    </div>
+    <div class="banner" th:text="|🌱 ${p.mensagemPlato}|"></div>
+  </div>
+  <div class="card">
+    <h2>Indicadores do mês</h2>
+    <div class="bars">
+      <div class="bar-row"><div class="label">Hábitos no mês</div>
+        <div class="bar-track"><div class="bar-fill" th:style="|width:${p.percentualHabitosMes}%;background:var(--accent)|"></div></div>
+        <div class="small muted" th:text="|${p.percentualHabitosMes}%|"></div></div>
+      <div class="bar-row"><div class="label">Top 3 da semana</div>
+        <div class="bar-track"><div class="bar-fill" th:style="|width:${p.percentualTop3Semana}%;background:var(--accent2)|"></div></div>
+        <div class="small muted" th:text="|${p.percentualTop3Semana}%|"></div></div>
+    </div>
+    <p class="muted small">Indicadores são feedback, não julgamento. Eles mostram onde ajustar o rumo.</p>
+  </div>
+</main>
+</body>
+</html>
